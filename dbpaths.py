@@ -1,7 +1,7 @@
 import os
 
 # Database Names
-HISTORY = ''
+HISTORY = '' # URLs, Download and Keyword/Search Terms tables belong to this DB
 LOGIN = ''
 TOP_SITES = ''
 WEB_DATA = ''

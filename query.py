@@ -63,7 +63,7 @@ DESC;
 
 LOGIN_INFO_COLUMNS = ['Origin URL', 'User Name', 'Date Last Used', 'Date Password Modified', 'Times Used']
 
-TOP_SITES = """
+TOP_SITES_QUERY = """
 SELECT 
     title , 
     url, 
