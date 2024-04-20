@@ -1,6 +1,8 @@
 import os
-
+import logging
+logging.basicConfig(level=logging.ERROR)
 # Database Names
+DB_PATHS = {}
 HISTORY = '' # URLs, Download and Keyword/Search Terms tables belong to this DB
 LOGIN = ''
 TOP_SITES = ''
@@ -17,4 +19,11 @@ elif os.name == 'nt':
     LOGIN = os.path.join(folder_path, 'Login Data')
     TOP_SITES = os.path.join(folder_path, 'Top Sites')
 else:
+    logging.error(f'{os.name} is not listed in dbpaths.py')
     exit(0)
+
+DB_PATHS['URLS'] = HISTORY
+DB_PATHS['DOWNLOADS'] = HISTORY
+DB_PATHS['SEARCH_TERMS'] = HISTORY
+DB_PATHS['LOGIN'] = LOGIN
+DB_PATHS['TOP_SITES'] = TOP_SITES
