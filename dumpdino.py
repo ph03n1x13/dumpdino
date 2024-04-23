@@ -5,17 +5,19 @@ import logging
 import datetime
 import dbfetcher
 import argparse
+import bookmarks
 from dbpaths import DB_PATHS
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-t', '--type', type=str, \
-                    required=False, help='urls, top, download, terms, login')
+                    required=False, help='urls, top, download, terms, login, bookmarks')
 args = parser.parse_args()
 
 result = []
-fetcher = dbfetcher.databaseFetcher()
+fetcher = dbfetcher.DatabaseFetcher()
+bookmarks = bookmarks.Bookmarks()
 datetime_obj = datetime.datetime.now()
 datetime_suffix = datetime_obj.strftime('%Y%m%d%H%M%S')
 
@@ -49,7 +51,11 @@ elif args.type == 'top':
     fetcher.generate_csv_report(output_file, query.TOP_SITES_COLUMNS, result)
     logger.info(f'{args.type} data saved in {output_file}.csv')
 
+elif args.type == 'bookmarks':
+    output_file = 'bookmarks_' + datetime_suffix
+    bookmarks_list = bookmarks.get_bookmarks_list(DB_PATHS['BOOKMARKS'])
+    bookmarks.bookmarks_csv_report(output_file, bookmarks_list)
+    logger.info(f'{args.type} data saved in {output_file}.csv')
+
 else:
     parser.print_help()
-
-

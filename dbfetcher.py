@@ -2,7 +2,7 @@ import csv
 import sqlite3
 
 
-class databaseFetcher():
+class DatabaseFetcher():
     def fetch_search_terms(self, db_path: str, sql_query: str):
         result = []
         with sqlite3.connect(db_path) as connection:
