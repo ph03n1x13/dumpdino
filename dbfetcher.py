@@ -61,7 +61,7 @@ class DatabaseFetcher():
                 exit(1)
 
     def generate_csv_report(self, file_name: str, column_headers: list, result: list):
-        with open(file_name+'.csv', 'w', newline='') as csv_file:
+        with open(file_name+'.csv', 'w', newline='', encoding="utf-8") as csv_file:
             csv_writer = csv.writer(csv_file)
             csv_writer.writerow(column_headers)
             for column in result:
