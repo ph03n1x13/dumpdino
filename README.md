@@ -12,6 +12,27 @@ Presently, this script fetches the following data
 - Most browsed sites
 - Bookmarks **Special Thanks to Sadman Sakib for reviewing this Code during a 6 point earthquake**
 
+### Usages  
+- Get help
+```commandline
+$ python3 dumpdino.py -h
+usage: dumpdino.py [-h] [-t TYPE]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -t TYPE, --type TYPE  urls, top, download, terms, login, bookmarks
+```
+- Error when the browser is open 
+```commandline
+$ python3 dumpdino.py --type login
+[!] sqlite3 error: database is locked
+```
+- Fetch top 10 visited site 
+```commandline
+$ python3 dumpdino.py --type top
+INFO:root:top data saved in top_sites_20240425223203.csv
+```
+
 ### To Dos
 - Unit testable code structure 
 - Localized time for `bookmarks` module
