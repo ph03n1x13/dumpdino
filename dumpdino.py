@@ -6,18 +6,20 @@ import datetime
 import dbfetcher
 import argparse
 import bookmarks
+import cookies
 from dbpaths import DB_PATHS
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-t', '--type', type=str, \
-                    required=False, help='urls, top, download, terms, login, bookmarks')
+                    required=False, help='urls, top, download, terms, login, bookmarks, cookies')
 args = parser.parse_args()
 
 result = []
 fetcher = dbfetcher.DatabaseFetcher()
 bookmarks = bookmarks.Bookmarks()
+cookies = cookies.Cookies()
 datetime_obj = datetime.datetime.now()
 datetime_suffix = datetime_obj.strftime('%Y%m%d%H%M%S')
 
@@ -55,6 +57,12 @@ elif args.type == 'bookmarks':
     output_file = 'bookmarks_' + datetime_suffix
     bookmarks_list = bookmarks.get_bookmarks_list(DB_PATHS['BOOKMARKS'])
     bookmarks.bookmarks_csv_report(output_file, bookmarks_list)
+    logger.info(f'{args.type} data saved in {output_file}.csv')
+
+elif args.type == 'cookies':
+    output_file = 'cookies_' + datetime_suffix
+    result = cookies.fetch_cookie_info(DB_PATHS['COOKIES'], query.COOKIES_QUERY)
+    fetcher.generate_csv_report(output_file, query.COOKIES_COLUMNS, result)
     logger.info(f'{args.type} data saved in {output_file}.csv')
 
 else:

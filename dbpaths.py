@@ -8,11 +8,13 @@ LOGIN = ''
 TOP_SITES = ''
 WEB_DATA = ''
 BOOKMARK_JSON = ''
+COOKIES = ''
 if os.name == 'posix':
     HISTORY = os.path.expanduser("~/.config/google-chrome/Default/History")
     LOGIN = os.path.expanduser('~/.config/google-chrome/Default/Login Data')
     TOP_SITES = os.path.expanduser('~/.config/google-chrome/Default/Top Sites')
     BOOKMARK_JSON = os.path.expanduser('~/.config/google-chrome/Default/Bookmarks')
+    COOKIES = os.path.expanduser('~/.config/google-chrome/Default/Cookies')
 
 elif os.name == 'nt':
     local_app_data = os.getenv('LOCALAPPDATA')
@@ -21,6 +23,7 @@ elif os.name == 'nt':
     LOGIN = os.path.join(folder_path, 'Login Data')
     TOP_SITES = os.path.join(folder_path, 'Top Sites')
     BOOKMARK_JSON = os.path.join(folder_path, 'Bookmarks')
+    COOKIES = os.path.join(folder_path, 'Cookies')
 else:
     logging.error(f'{os.name} is not listed in dbpaths.py')
     exit(0)
@@ -31,3 +34,4 @@ DB_PATHS['SEARCH_TERMS'] = HISTORY
 DB_PATHS['LOGIN'] = LOGIN
 DB_PATHS['TOP_SITES'] = TOP_SITES
 DB_PATHS['BOOKMARKS'] = BOOKMARK_JSON
+DB_PATHS['COOKIES'] = COOKIES

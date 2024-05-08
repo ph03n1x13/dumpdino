@@ -76,3 +76,19 @@ DESC;
 """
 
 TOP_SITES_COLUMNS = ['Title', 'URL', 'Times Visited']
+
+COOKIES_QUERY = """
+SELECT 
+    host_key,
+    path, 
+    name,
+    datetime(creation_utc / 1000000 + (strftime('%s', '1601-01-01')), 'unixepoch', 'localtime'), 
+    datetime(last_access_utc / 1000000 + (strftime('%s', '1601-01-01')), 'unixepoch', 'localtime'), 
+    datetime(last_update_utc / 1000000 + (strftime('%s', '1601-01-01')), 'unixepoch', 'localtime'), 
+    datetime(expires_utc / 1000000 + (strftime('%s', '1601-01-01')), 'unixepoch', 'localtime') 
+FROM 
+    cookies
+ORDER BY
+    host_key        
+"""
+COOKIES_COLUMNS = ['Host Key', 'Path', 'Name', 'Creation Date', 'Last Access', 'Last Update', 'Expire Date']

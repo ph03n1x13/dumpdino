@@ -11,7 +11,7 @@ Presently, this script fetches the following data
 - Login info 
 - Most browsed sites
 - Bookmarks **Special Thanks to Sadman Sakib for reviewing this Code during a 6 point earthquake**
-
+- Cookies insight (No decryption).
 ### Usages  
 - Get help
 ```commandline
