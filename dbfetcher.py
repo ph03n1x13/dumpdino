@@ -14,6 +14,8 @@ class DatabaseFetcher():
             except sqlite3.Error as sqlite_error:
                 print(f'[!] sqlite3 error: {sqlite_error}')
                 exit(1)
+
+
     def fetch_download_info(self, db_path: str, sql_query: str):
         result = []
         with sqlite3.connect(db_path) as connection:
@@ -25,6 +27,7 @@ class DatabaseFetcher():
             except sqlite3.Error as sqlite_error:
                 print(f'[!] sqlite3 error: {sqlite_error}')
                 exit(1)
+
     def fetch_login_info(self, db_path: str, sql_query: str):
         result = []
         with sqlite3.connect(db_path) as connection:
@@ -48,6 +51,7 @@ class DatabaseFetcher():
             except sqlite3.Error as sqlite_error:
                 print(f'[!] sqlite3 error: {sqlite_error}')
                 exit(1)
+
     def fetch_top_sites(self, db_path: str, sql_query: str):
         result = []
         with sqlite3.connect(db_path) as connection:

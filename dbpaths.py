@@ -1,6 +1,8 @@
 import os
 import logging
 logging.basicConfig(level=logging.ERROR)
+
+
 # Database Names
 DB_PATHS = {}
 HISTORY = '' # URLs, Download and Keyword/Search Terms tables belong to this DB
