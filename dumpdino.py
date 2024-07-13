@@ -44,7 +44,7 @@ elif args.type == 'download':
 elif args.type == 'terms':
     output_file = 'search_terms_info_' + datetime_suffix
     result = fetcher.fetch_search_terms(DB_PATHS['SEARCH_TERMS'], query.SEARCH_TERMS_QUERY)
-    fetcher.generate_csv_report(output_file, query.LOGIN_INFO_COLUMNS, result)
+    fetcher.generate_csv_report(output_file, query.SEARCH_TERMS_COLUMNS, result)
     logger.info(f'{args.type} data saved in {output_file}.csv')
 
 elif args.type == 'top':
