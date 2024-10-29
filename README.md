@@ -21,6 +21,9 @@ usage: dumpdino.py [-h] [-t TYPE]
 optional arguments:
   -h, --help            show this help message and exit
   -t TYPE, --type TYPE  urls, top, download, terms, login, bookmarks
+
+$ PROFILE_DIR=<TARGET_PROFILE_DIRECTORY> python3 dumpdino.py -h
+
 ```
 - Error when the browser is open 
 ```commandline
