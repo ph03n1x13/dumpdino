@@ -11,24 +11,25 @@ TOP_SITES = ''
 WEB_DATA = ''
 BOOKMARK_JSON = ''
 COOKIES = ''
-if os.name == 'posix':
-    HISTORY = os.path.expanduser("~/.config/google-chrome/Default/History")
-    LOGIN = os.path.expanduser('~/.config/google-chrome/Default/Login Data')
-    TOP_SITES = os.path.expanduser('~/.config/google-chrome/Default/Top Sites')
-    BOOKMARK_JSON = os.path.expanduser('~/.config/google-chrome/Default/Bookmarks')
-    COOKIES = os.path.expanduser('~/.config/google-chrome/Default/Cookies')
 
-elif os.name == 'nt':
-    local_app_data = os.getenv('LOCALAPPDATA')
-    folder_path = local_app_data + r'\Google\Chrome\User Data\Default'
-    HISTORY = os.path.join(folder_path, 'History')
-    LOGIN = os.path.join(folder_path, 'Login Data')
-    TOP_SITES = os.path.join(folder_path, 'Top Sites')
-    BOOKMARK_JSON = os.path.join(folder_path, 'Bookmarks')
-    COOKIES = os.path.join(folder_path, 'Cookies')
-else:
-    logging.error(f'{os.name} is not listed in dbpaths.py')
-    exit(0)
+PROFILE_DIR = os.getenv('PROFILE_DIR')
+if not PROFILE_DIR:
+    if os.name == 'posix':
+        PROFILE_DIR = os.path.expanduser("~/.config/google-chrome/Default/")
+    elif os.name == 'nt':
+        local_app_data = os.getenv('LOCALAPPDATA')
+        PROFILE_DIR = os.path.join(local_app_data, r'Google\Chrome\User Data\Default')
+    else:
+        logging.error(f'{os.name} is not listed in dbpaths.py')
+        exit(0)
+
+# Set database paths
+HISTORY = os.path.join(PROFILE_DIR, 'History')
+LOGIN = os.path.join(PROFILE_DIR, 'Login Data')
+TOP_SITES = os.path.join(PROFILE_DIR, 'Top Sites')
+BOOKMARK_JSON = os.path.join(PROFILE_DIR, 'Bookmarks')
+COOKIES = os.path.join(PROFILE_DIR, 'Cookies')
+
 
 DB_PATHS['URLS'] = HISTORY
 DB_PATHS['DOWNLOADS'] = HISTORY
