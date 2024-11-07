@@ -21,10 +21,13 @@ usage: dumpdino.py [-h] [-t TYPE]
 optional arguments:
   -h, --help            show this help message and exit
   -t TYPE, --type TYPE  urls, top, download, terms, login, bookmarks
+
+$ PROFILE_DIR=<TARGET_PROFILE_DIRECTORY> python3 dumpdino.py -h
+
 ```
 - Error when the browser is open 
 ```commandline
-$ python3 dumpdino.py --type login
+$ python3 dumpdino.py --type login --ofolder <the output folder>
 [!] sqlite3 error: database is locked
 ```
 - Fetch top 10 visited site 
