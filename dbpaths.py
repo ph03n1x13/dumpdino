@@ -1,4 +1,5 @@
 import os
+import sys
 import logging
 logging.basicConfig(level=logging.ERROR)
 
@@ -21,7 +22,7 @@ if not PROFILE_DIR:
         PROFILE_DIR = os.path.join(local_app_data, r'Google\Chrome\User Data\Default')
     else:
         logging.error(f'{os.name} is not listed in dbpaths.py')
-        exit(0)
+        sys.exit(1)
 
 # Set database paths
 HISTORY = os.path.join(PROFILE_DIR, 'History')

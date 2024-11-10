@@ -33,7 +33,7 @@ class Bookmarks():
 
     def bookmarks_csv_report(self, file_name: str, bookmarks_list: list):
         headers = ['Name', 'URL', 'Date Added', 'Date Last Used']
-        with open(file_name+'.csv', 'w', newline='') as csv_file:
+        with open(file_name, 'w', newline='') as csv_file:
             csv_writer = csv.writer(csv_file)
             csv_writer.writerow(headers)
             for bookmark_dict in bookmarks_list:

@@ -27,7 +27,7 @@ $ PROFILE_DIR=<TARGET_PROFILE_DIRECTORY> python3 dumpdino.py -h
 ```
 - Error when the browser is open 
 ```commandline
-$ python3 dumpdino.py --type login --ofolder <the output folder>
+$ python3 dumpdino.py --type login --output-dir <the output folder>
 [!] sqlite3 error: database is locked
 ```
 - Fetch top 10 visited site 
