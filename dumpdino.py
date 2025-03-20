@@ -1,13 +1,15 @@
+import argparse
+import datetime
+import logging
 import os
 import sys
-import query
-import logging
-import datetime
-import dbfetcher
-import argparse
+
 import bookmarks
 import cookies
+import dbfetcher
+import query
 from dbpaths import DB_PATHS
+from imagefetcher import FetchImageFromCache
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -15,20 +17,30 @@ logger.setLevel(logging.INFO)
 # Set up argument parser
 parser = argparse.ArgumentParser()
 parser.add_argument('-t', '--type', type=str,
-                    required=False, help='urls, top, download, terms, login, bookmarks, cookies, all')
+                    required=False, help='urls, top, download, terms, login, bookmarks, cookies, cache_image, cache_data, all')
 parser.add_argument('--output-dir', type=str,
-                    required=False, default='.', help='Output folder path (default: current directory)')
+                    required=False, default='./reports', help='Output folder path (default: ./reports)')
 parser.add_argument('--browser-dir', type=str,
                     required=False, help='Set the browser profile directory')
+parser.add_argument('--cache-dir', type=str,
+                    required=False, help='Set the cache directory')
 
 args = parser.parse_args()
 
 # Set PROFILE_DIR environment variable if --browser-dir is provided
 if args.browser_dir:
     os.environ['PROFILE_DIR'] = args.browser_dir
+    os.environ['CACHE_DIR'] = args.cache_dir
+
+# Confirm output and extracted image dirs are present directory
+output_dir = args.output_dir
+os.makedirs(output_dir, exist_ok=True)
 
 # Allowed types for validation
-allowed_types = {'urls', 'top', 'download', 'terms', 'login', 'bookmarks', 'cookies', 'all'}
+allowed_types = {'urls', 'top', 'download', 'terms',
+                 'login', 'bookmarks', 'cookies','image',
+                 'cache_data', 'all'
+            }
 
 # Print help if --type is missing or invalid
 if args.type is None or args.type not in allowed_types:
@@ -88,3 +100,8 @@ if args.type in ('cookies', 'all'):
     result = cookies.fetch_cookie_info(DB_PATHS['COOKIES'], query.COOKIES_QUERY)
     fetcher.generate_csv_report(output_file, query.COOKIES_COLUMNS, result)
     logger.info(f'{args.type} data saved in {output_file}')
+
+if args.type in ('image', 'all'):
+    image_fetcher = FetchImageFromCache()
+    image_fetcher.find_images_in_cache()
+    logger.info(f'Cached image extraction done')
