@@ -1,8 +1,8 @@
 import os
 import sys
 import logging
-logging.basicConfig(level=logging.ERROR)
 
+logging.basicConfig(level=logging.ERROR)
 
 # Database Names
 DB_PATHS = {}
@@ -14,6 +14,8 @@ BOOKMARK_JSON = ''
 COOKIES = ''
 
 PROFILE_DIR = os.getenv('PROFILE_DIR')
+CACHE_DIR = os.getenv('CACHE_DIR')
+
 if not PROFILE_DIR:
     if os.name == 'posix':
         PROFILE_DIR = os.path.expanduser("~/.config/google-chrome/Default/")
@@ -21,7 +23,17 @@ if not PROFILE_DIR:
         local_app_data = os.getenv('LOCALAPPDATA')
         PROFILE_DIR = os.path.join(local_app_data, r'Google\Chrome\User Data\Default')
     else:
-        logging.error(f'{os.name} is not listed in dbpaths.py')
+        logging.error(f'{os.name} for PROFILE_DIR is not listed in dbpaths.py')
+        sys.exit(1)
+
+if not CACHE_DIR:
+    if os.name == 'posix':
+        CACHE_DIR = os.path.expanduser("~/.cache/google-chrome/Default/Cache/Cache_Data/")
+    elif os.name == 'nt':
+        local_app_data = os.getenv('LOCALAPPDATA')
+        CACHE_DIR = os.path.join(local_app_data, r'Google\Chrome\User Data\Default\Cache')
+    else:
+        logging.error(f'{os.name} for CACHE_DIR is not listed in dbpaths.py')
         sys.exit(1)
 
 # Set database paths
@@ -30,7 +42,6 @@ LOGIN = os.path.join(PROFILE_DIR, 'Login Data')
 TOP_SITES = os.path.join(PROFILE_DIR, 'Top Sites')
 BOOKMARK_JSON = os.path.join(PROFILE_DIR, 'Bookmarks')
 COOKIES = os.path.join(PROFILE_DIR, 'Cookies')
-
 
 DB_PATHS['URLS'] = HISTORY
 DB_PATHS['DOWNLOADS'] = HISTORY

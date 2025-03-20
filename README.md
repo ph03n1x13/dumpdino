@@ -25,6 +25,7 @@ optional arguments:
 $ PROFILE_DIR=<TARGET_PROFILE_DIRECTORY> python3 dumpdino.py -h
 
 ```
+Here `PROFILE_DIR` is the path to default e.g. `PROFILE_DIR=~/.config/google-chrome/Default/`  
 - Error when the browser is open 
 ```commandline
 $ python3 dumpdino.py --type login --output-dir <the output folder>
