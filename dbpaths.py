@@ -31,7 +31,7 @@ if not CACHE_DIR:
         CACHE_DIR = os.path.expanduser("~/.cache/google-chrome/Default/Cache/Cache_Data/")
     elif os.name == 'nt':
         local_app_data = os.getenv('LOCALAPPDATA')
-        CACHE_DIR = os.path.join(local_app_data, r'Google\Chrome\User Data\Default\Cache')
+        CACHE_DIR = os.path.join(local_app_data, r'Google\Chrome\User Data\Default\Cache\Cache_Data')
     else:
         logging.error(f'{os.name} for CACHE_DIR is not listed in dbpaths.py')
         sys.exit(1)
@@ -50,3 +50,4 @@ DB_PATHS['LOGIN'] = LOGIN
 DB_PATHS['TOP_SITES'] = TOP_SITES
 DB_PATHS['BOOKMARKS'] = BOOKMARK_JSON
 DB_PATHS['COOKIES'] = COOKIES
+DB_PATHS['CACHE'] = CACHE_DIR

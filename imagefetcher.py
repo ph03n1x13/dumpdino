@@ -15,7 +15,7 @@ class FetchImageFromCache:
         "webp": (b"RIFF", b"WEBP")  # WebP container format
     }
 
-    def __init__(self, cache_dir=None, output_dir=None):
+    def __init__(self, cache_dir: str, output_dir=None):
         """
         Initializes the FetchImageFromCache class.
 
@@ -25,11 +25,8 @@ class FetchImageFromCache:
             output_dir (str, optional): The directory to save extracted images.
                 Defaults to "extracted_images" in the current directory if None.
         """
-        if cache_dir is None:
-            self.cache_dir = os.path.expanduser("~/.cache/google-chrome/Default/Cache/Cache_Data")
-        else:
-            self.cache_dir = cache_dir
 
+        self.cache_dir = cache_dir
         if output_dir is None:
             self.output_dir = "extracted_images"
         else:

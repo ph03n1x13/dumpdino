@@ -38,7 +38,7 @@ os.makedirs(output_dir, exist_ok=True)
 
 # Allowed types for validation
 allowed_types = {'urls', 'top', 'download', 'terms',
-                 'login', 'bookmarks', 'cookies','image',
+                 'login', 'bookmarks', 'cookies','cache_image',
                  'cache_data', 'all'
             }
 
@@ -101,7 +101,7 @@ if args.type in ('cookies', 'all'):
     fetcher.generate_csv_report(output_file, query.COOKIES_COLUMNS, result)
     logger.info(f'{args.type} data saved in {output_file}')
 
-if args.type in ('image', 'all'):
-    image_fetcher = FetchImageFromCache()
+if args.type in ('cache_image', 'all'):
+    image_fetcher = FetchImageFromCache(cache_dir=DB_PATHS['CACHE'])
     image_fetcher.find_images_in_cache()
     logger.info(f'Cached image extraction done')
