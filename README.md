@@ -36,6 +36,12 @@ $ python3 dumpdino.py --type login --output-dir <the output folder>
 $ python3 dumpdino.py --type top
 INFO:root:top data saved in top_sites_20240425223203.csv
 ```
+- Find threats from fetched urls  
+  1. First get url info by running `$ python3 dumpdino.py -t urls`  
+  2. Go to `utils`  
+  3. run `$ python3 check_url_haus.py <urlhaus_api_key> ../reports/url_info<timestamp>.csv`
+  4. If any threat found it will be kept in reports/threat_urls_<timestamp>.txt file
+
 
 ### To Dos
 - Unit testable code structure 
